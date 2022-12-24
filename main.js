@@ -31,15 +31,15 @@ $(function () {
         el.addClass('small-indicates');
 
         let windowSize = $(window).width()
-        
+        let smallIndicateGap = ''
         if(windowSize >= 480)
-            el.css({
-                "transform":`rotateZ(${deg}deg) translateY(-172px)`
-            })
+            smallIndicateGap += '-172px'
         else
-            el.css({
-                "transform":`rotateZ(${deg}deg) translateY(-130px)`
-            })
+            smallIndicateGap += '-130px'
+
+        el.css({
+            "transform":`rotateZ(${deg}deg) translateY(${smallIndicateGap})`
+        })
         clock.append(el);
     }
     
@@ -47,4 +47,22 @@ $(function () {
         createASmallIndicate(i);
     }
 
+
+    $(window).resize(()=>{
+        var els = $('.small-indicates');
+
+        let windowSize = $(window).width()
+        let smallIndicateGap = ''
+        if(windowSize >= 480)
+            smallIndicateGap += '-172px'
+        else
+            smallIndicateGap += '-130px'
+
+        let deg = 0
+        for(let i = 0; i < els.length; i++){
+            els[i].style.transform = `rotateZ(${deg}deg) translateY(${smallIndicateGap})`
+            deg += 5
+        }
+       
+    })
 });
